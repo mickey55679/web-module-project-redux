@@ -1,7 +1,8 @@
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { deleteMovie } from '../actions/movieActions';
+import { deleteMovie } from "../actions/movieActions";
+import { addFavorite } from "../actions/favoritesActions";
 import movieReducer from '../reducers/movieReducer';
 import favoritesReducer from '../reducers/favoritesReducer';
 
@@ -9,12 +10,21 @@ const Movie = (props) => {
     const { id } = useParams();
     const { push } = useHistory();
 
-    const { movies, displayFavorites, deleteMovie } = props;
+    const { movies, displayFavorites, deleteMovie, addFavorite } = props;
     const movie = movies.find(movie=>movie.id===Number(id));
 
+    if (!movie) {
+        return <div>Movie not found</div>
+    }
+    //had to add this to make my app work, was not in instructions. 
+ 
     const handleDeleteClick = () => {
       deleteMovie(movie.id);
       push('/movies')
+    }
+    const handleFavoriteClick = () => {
+        addFavorite(movie);
+
     }
     
     return (
@@ -57,7 +67,7 @@ const Movie = (props) => {
 
                 <section>
                   {displayFavorites && (
-                    <span className="m-2 btn btn-dark">Favorite</span>
+                    <span onClick={handleFavoriteClick} className="m-2 btn btn-dark">Favorite</span>
                   )}
                   <span className="delete" onClick={handleDeleteClick}>
                     <input
@@ -81,4 +91,4 @@ const mapStateToProps = state => {
     };
 }
 
-export default connect(mapStateToProps, {deleteMovie})(Movie);
+export default connect(mapStateToProps, {deleteMovie, addFavorite})(Movie);
