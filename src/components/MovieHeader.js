@@ -1,10 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import movieReducer from '../reducers/movieReducer';
+import favoritesReducer from '../reducers/favoritesReducer';
+
 
 const MovieHeader = (props) => {
     const {appTitle} = props;
-    const displayFavorites = true;
+    const {displayFavorites} = props;
     
     return(<div className="table-title">
         <div className="row">
@@ -21,9 +24,10 @@ const MovieHeader = (props) => {
 }
 
 const mapStateToProps = state => {
- return({
-    appTitle: state.appTitle
- })
+ return {
+   displayFavorites: state.favoritesReducer.displayFavorites,
+   appTitle:state.movieReducer.appTitle,
+ };
 }
 
 export default connect(mapStateToProps)(MovieHeader);

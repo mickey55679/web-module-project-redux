@@ -3,6 +3,7 @@ import React from 'react';
 import MovieListItem from './MovieListItem';
 import MovieFooter from './MovieFooter';
 import { connect } from 'react-redux';
+import movieReducer from '../reducers/movieReducer';
 
 const MovieList = (props)=> {
     const {movies} = props // this was const movies = [];
@@ -34,7 +35,7 @@ const MovieList = (props)=> {
 }
 const mapStateToProps = state => {
     return ({
-        movies: state.movies
+        movies:state.movieReducer.movies
     })
 
 }

@@ -2,12 +2,14 @@ import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { deleteMovie } from '../actions/movieActions';
+import movieReducer from '../reducers/movieReducer';
+import favoritesReducer from '../reducers/favoritesReducer';
 
 const Movie = (props) => {
     const { id } = useParams();
     const { push } = useHistory();
 
-    const {movies, deleteMovie} = props;
+    const { movies, displayFavorites, deleteMovie } = props;
     const movie = movies.find(movie=>movie.id===Number(id));
 
     const handleDeleteClick = () => {
@@ -54,9 +56,10 @@ const Movie = (props) => {
     </div>);
 }
 const mapStateToProps = state => {
-    return({
-        movies: state.movies
-    })
+    return {
+      displayFavorites: state.favoritesReducer.displayFavorites,
+      movies: state.movieReducer.movies,
+    };
 }
 
 export default connect(mapStateToProps, {deleteMovie})(Movie);

@@ -1,10 +1,11 @@
 import React from 'react';
-
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import favoritesReducer from '../reducers/favoritesReducer';
 
 
 const FavoriteMovieList = (props) => {
-    const favorites = [];
+    const {favorites} = props;
     
     return (<div className="col-xs savedContainer">
         <h5>Favorite Movies</h5>
@@ -20,6 +21,10 @@ const FavoriteMovieList = (props) => {
         }
     </div>);
 }
+const mapStateToProps = state => {
+    return {
+      favorites: state.favoritesReducer.favorites,
+    };
+}
 
-
-export default FavoriteMovieList;
+export default connect(mapStateToProps)(FavoriteMovieList);

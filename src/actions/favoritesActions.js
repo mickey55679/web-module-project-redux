@@ -2,7 +2,7 @@ export const TOGGLE_FAVORITES = "TOGGLE_FAVORITES";
 export const ADD_FAVORITE = "ADD_FAVORITE";
 export const REMOVE_FAVORITE = "REMOVE_FAVORITE";
 
-export const toggleFavorites = ()=> {
+export const toggleFavorites = () => {
     return({type: TOGGLE_FAVORITES});
 }
 
